@@ -9,18 +9,15 @@ import { CATEGORIES, TASKS } from "../data";
 // console.log({ CATEGORIES, TASKS });
 
 function App() {
-
-  const [selectedCategory, setSelectedCategory] = useState('all')
-
-  function onSelectedCategory(newList){
-    console.log(newList.category)
-    
-    const filteredTasks = TASKS.filter((task)=>{
-      console.log(task.category)
-      if(selectedCategory === 'all') return true;
-      return task.category === newList.category
-    })
-    setSelectedCategory(filteredTasks)
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  
+  const filtered = TASKS.filter((task)=>{
+    if(selectedCategory === 'All') return true;
+    return task.category === selectedCategory
+  })
+  
+  function onSelectedCategory(category){
+    setSelectedCategory(category)
   }
 
   return (
@@ -28,7 +25,7 @@ function App() {
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} onCategory ={onSelectedCategory}/>
       <NewTaskForm />
-      <TaskList tasks ={TASKS} onCategory={onSelectedCategory}/>
+      <TaskList tasks ={filtered}/>
     </div>
   );
 }

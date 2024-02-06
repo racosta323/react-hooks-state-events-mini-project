@@ -8,7 +8,7 @@ function CategoryFilter({ categories, onCategory }) {
   const renderCategories = () => {
     return categories.map((category)=>{
       return (
-        <button key={category} onClick={()=>onCategory({category})}>{category}</button>
+        <button key={category} onClick={()=>onCategory(category)}>{category}</button>
         )
     })
   }
