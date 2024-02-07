@@ -10,34 +10,16 @@ import { CATEGORIES, TASKS } from "../data";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('All')
-  const [tasks, setTasks] = useState(TASKS) //i think i just want to change this
+  const [tasks, setTasks] = useState(TASKS) 
   const [className, setClass] = useState(false)
-  const [newDetails, setNewDetails] = useState("")
   
- function handleSelect(event){
-    const selectedCategory = event.target.value
-    setSelectedCategory(selectedCategory)
-  }
-
   
-
-  function addTask(e){
-    console.log(e)
-    e.preventDefault()
-
-    const newTask = {
-      text: newDetails,
-      category: selectedCategory,
-      key: newDetails,
-      removeHandler: {removeHandler}
-    }
+  function onTaskFormSubmit(newTask){
   
     const updatedTasks = [...tasks, newTask]
 
     setTasks(updatedTasks)
   }
-
-  
 
   const filteredTasksByCategory = tasks.filter((task)=>{
     if(selectedCategory === 'All') return true;
@@ -65,11 +47,7 @@ function App() {
       />
       <NewTaskForm 
         categories={CATEGORIES} 
-        newDetails={newDetails} 
-        setNewDetails={setNewDetails} 
-        onTaskFormSubmit={addTask}
-        handleSelect={handleSelect}
-        selectedCategory={selectedCategory}
+        onTaskFormSubmit={onTaskFormSubmit}
       />
       <TaskList 
         tasks ={filteredTasksByCategory} 
